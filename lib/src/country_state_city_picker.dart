@@ -32,8 +32,8 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   @override
   void initState() {
     super.initState();
-    _getCountry();
     widget.country.text = "Spain";
+    _getState();
   }
 
   Future<void> _getCountry()async{
