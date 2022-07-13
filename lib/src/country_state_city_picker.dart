@@ -46,7 +46,8 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     });
   }
 
-  Future<void> _getState(String countryId)async{
+  Future<void> _getState()async{
+    String countryId = "205";
     _stateList.clear();
     _cityList.clear();
     List<StateModel> _subStateList=[];
@@ -85,23 +86,6 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ///Country TextField
-        TextField(
-          controller: widget.country,
-          onTap: (){
-            setState(()=>_title='Country');
-            _showDialog(context);
-          },
-          decoration: InputDecoration(
-              isDense: true,
-              hintText: 'Select Country',
-              suffixIcon: Icon(Icons.arrow_drop_down),
-              border: widget.textFieldInputBorder?? OutlineInputBorder()
-          ),
-          readOnly: true,
-        ),
-        SizedBox(height: 8.0),
-
         ///State TextField
         TextField(
           controller: widget.state,
@@ -224,7 +208,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                                   setState((){
                                     if(_title=="Country"){
                                       widget.country.text= _countrySubList[index].name;
-                                      _getState("205");
+                                      _getState();
                                       _countrySubList=_countryList;
                                       widget.state.clear();
                                       widget.city.clear();
