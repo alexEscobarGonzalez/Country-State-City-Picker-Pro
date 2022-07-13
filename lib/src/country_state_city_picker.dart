@@ -5,20 +5,20 @@ import './model/city_model.dart';
 import './model/country_model.dart';
 import './model/state_model.dart';
 
-class CountryStateCityPickerAlex extends StatefulWidget {
+class CountryStateCityPicker extends StatefulWidget {
   TextEditingController country;
   TextEditingController state;
   TextEditingController city;
   InputBorder? textFieldInputBorder;
 
-  CountryStateCityPickerAlex({required this.country, required this.state, required this.city, this.textFieldInputBorder});
+  CountryStateCityPicker({required this.country, required this.state, required this.city, this.textFieldInputBorder});
   
 
   @override
   _CountryStateCityPickerState createState() => _CountryStateCityPickerState();
 }
 
-class _CountryStateCityPickerState extends State<CountryStateCityPickerAlex> {
+class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   List<CountryModel> _countryList=[];
   List<StateModel> _stateList=[];
   List<CityModel> _cityList=[];
@@ -33,7 +33,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPickerAlex> {
   void initState() {
     super.initState();
     _getCountry();
-    widget.country.text = 'Spain';
+    widget.country.text = "Spain";
   }
 
   Future<void> _getCountry()async{
@@ -85,7 +85,24 @@ class _CountryStateCityPickerState extends State<CountryStateCityPickerAlex> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-       ///State TextField
+        ///Country TextField
+        TextField(
+          controller: widget.country,
+          onTap: (){
+            setState(()=>_title='Country');
+            _showDialog(context);
+          },
+          decoration: InputDecoration(
+              isDense: true,
+              hintText: 'Select Country',
+              suffixIcon: Icon(Icons.arrow_drop_down),
+              border: widget.textFieldInputBorder?? OutlineInputBorder()
+          ),
+          readOnly: true,
+        ),
+        SizedBox(height: 8.0),
+
+        ///State TextField
         TextField(
           controller: widget.state,
           onTap: (){
@@ -96,7 +113,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPickerAlex> {
           },
           decoration: InputDecoration(
               isDense: true,
-              hintText: 'Select State',
+              hintText: 'Selecciona provincia',
               suffixIcon: Icon(Icons.arrow_drop_down),
               border: widget.textFieldInputBorder?? OutlineInputBorder()
           ),
@@ -111,11 +128,11 @@ class _CountryStateCityPickerState extends State<CountryStateCityPickerAlex> {
             setState(()=>_title='City');
             if(widget.state.text.isNotEmpty)
               _showDialog(context);
-            else _showSnackBar('Select State');
+            else _showSnackBar('Selecciona provincia');
           },
           decoration: InputDecoration(
               isDense: true,
-              hintText: 'Select City',
+              hintText: 'Selecciona localidad',
               suffixIcon: Icon(Icons.arrow_drop_down),
               border: widget.textFieldInputBorder?? OutlineInputBorder()
           ),
@@ -207,7 +224,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPickerAlex> {
                                   setState((){
                                     if(_title=="Country"){
                                       widget.country.text= _countrySubList[index].name;
-                                      _getState(_countrySubList[index].id);
+                                      _getState("205");
                                       _countrySubList=_countryList;
                                       widget.state.clear();
                                       widget.city.clear();
