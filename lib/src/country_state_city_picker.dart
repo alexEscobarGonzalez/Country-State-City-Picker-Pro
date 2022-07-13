@@ -33,7 +33,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPickerAlex> {
   void initState() {
     super.initState();
     _getCountry();
-    widget.city.text = 'Spain';
+    widget.country.text = 'Spain';
   }
 
   Future<void> _getCountry()async{
