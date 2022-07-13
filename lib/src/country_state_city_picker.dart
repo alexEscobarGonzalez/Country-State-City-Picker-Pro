@@ -12,6 +12,7 @@ class CountryStateCityPicker extends StatefulWidget {
   InputBorder? textFieldInputBorder;
 
   CountryStateCityPicker({required this.country, required this.state, required this.city, this.textFieldInputBorder});
+  
 
   @override
   _CountryStateCityPickerState createState() => _CountryStateCityPickerState();
@@ -26,11 +27,13 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   List<StateModel> _stateSubList=[];
   List<CityModel> _citySubList=[];
   String _title='';
+  
 
   @override
   void initState() {
     super.initState();
     _getCountry();
+    widget.city.text = 'Spain';
   }
 
   Future<void> _getCountry()async{
@@ -82,24 +85,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ///Country TextField
-        TextField(
-          controller: widget.country,
-          onTap: (){
-            setState(()=>_title='Country');
-            _showDialog(context);
-          },
-          decoration: InputDecoration(
-              isDense: true,
-              hintText: 'Select Country',
-              suffixIcon: Icon(Icons.arrow_drop_down),
-              border: widget.textFieldInputBorder?? OutlineInputBorder()
-          ),
-          readOnly: true,
-        ),
-        SizedBox(height: 8.0),
-
-        ///State TextField
+       ///State TextField
         TextField(
           controller: widget.state,
           onTap: (){
